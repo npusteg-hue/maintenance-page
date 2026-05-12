@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="referrer" content="no-referrer">
+    <title>系統載入中...</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding-top: 100px; background: #fafafa; }
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #0071e3; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="loader"></div>
+    <p>正在確認系統狀態...</p>
+
+    <script>
+        // 接收 GAS 的資料並執行跳轉
+        function callback(data) {
+            // 在 GitHub 頂層環境執行跳轉，100% 自動且不會被攔截
+            window.location.replace(data.target);
+        }
+
+        // 去問 Google 試算表現在該去哪
+        const gasUrl = "你的_GAS_部署網址"; // 這裡貼上你剛剛部署的網址
+        const script = document.createElement('script');
+        script.src = gasUrl;
+        document.body.appendChild(script);
+
+        // 如果 5 秒內 GAS 沒反應，保險起見直接導向主機
+        setTimeout(() => {
+            window.location.replace("https://eg.npust.edu.tw/esh/");
+        }, 5000);
+    </script>
+</body>
+</html>
